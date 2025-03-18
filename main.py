@@ -39,6 +39,7 @@ def encrypt(state=None, key=None):
     else:
         cypherkey = key
 
+    print(f"Using AES{lenkey*8} to encrypt")
     for i in res:
         sub = stringToMat(i)
         sub = func[lenkey](sub, cypherkey)
@@ -93,37 +94,15 @@ def decrypt(state=None, key=None):
 
 
 def main():
-    encrypted_state = encrypt()
-    print(encrypted_state)
+    plain_text = input("Input you plain text: ")
+    key = input(
+        "Please insert your cipher key? Your key must be of length 16, 24 or 32: ")
+    encrypted_state = encrypt(plain_text, key)
 
-    decrypt_state = decrypt(encrypted_state)
-    print(decrypt_state)
-    # # Example plaintext and key (16 bytes for AES-128)
-    # plaintext = input("Input plaintext: ")
-    # while len(plaintext) < 16:
-    #     print("text length should be multiply of 16, current length: ", len(plaintext))
-    #     plaintext = input("Input plaintext again: ")
+    decrypt_state = decrypt(encrypted_state, key=key)
 
-    # key = "SecretAESKey1234"
-
-    # # Convert plaintext and key to matrix form
-    # state = stringToMat(plaintext)
-    # cypherkey = stringToMat(key)
-
-    # # Expand the key
-
-    # # Encrypt the plaintext
-    # encrypted_state = AES128(state, cypherkey)
-    # encrypted_text = matToString(encrypted_state)
-
-    # print("Encrypted Text:", ''.join(
-    #     f'{byte:02x}' for byte in np.ravel(encrypted_state)))
-
-    # # Decrypt the ciphertext
-    # decrypted_state = AES128_decrypt(encrypted_state, cypherkey)
-    # decrypted_text = matToString(decrypted_state)
-
-    # print("Decrypted Text:", decrypted_text)
+    print(
+        f"Your plain text: {plain_text} ecrypted to {encrypted_state} and will be decrypted back to {decrypt_state} with key: {key}")
 
 
 if __name__ == "__main__":

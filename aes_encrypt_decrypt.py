@@ -5,7 +5,6 @@ from sbox_and_rcon import *
 
 
 def AES128(state, cypherkey):
-    print("AES128")
     roundKey = keyExpansion128(
         cypherkey, sbox=sbox, rcon=rcon)
 
@@ -33,7 +32,6 @@ def AES128(state, cypherkey):
 
 
 def AES192(state, cypherkey):
-    print("AES192")
     roundKey = keyExpansion192(
         cypherkey, sbox=sbox, rcon=rcon)
 
@@ -62,7 +60,6 @@ def AES192(state, cypherkey):
 
 
 def AES256(state, cypherkey):
-    print("AES256")
     roundKey = keyExpansion256(
         cypherkey, sbox=sbox, rcon=rcon)
 

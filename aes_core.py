@@ -57,7 +57,6 @@ def shiftRows(state):
 
 
 def invSubBytes(state, rbox):
-    print(state)
     return [[rbox[byte] for byte in row] for row in state]
 
 
