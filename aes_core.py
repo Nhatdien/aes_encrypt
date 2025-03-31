@@ -14,8 +14,14 @@ def subBytes(state, sbox):
     return [[sbox[byte] for byte in row] for row in state]
 
 
-def gMixColumn(r):
+def shiftRows(state):
+    state[1] = state[1][1:] + state[1][:1]
+    state[2] = state[2][2:] + state[2][:2]
+    state[3] = state[3][3:] + state[3][:3]
+    return state
 
+
+def gMixColumn(r):
     a = [0, 0, 0, 0]  # [0 for i in range(4)]
     b = [0, 0, 0, 0]  # [0 for i in range(4)]
     r1 = [0, 0, 0, 0]
@@ -47,13 +53,6 @@ def gMixColumns(d):
     r1 = np.transpose(r1)
     r1 = r1.tolist()
     return r1
-
-
-def shiftRows(state):
-    state[1] = state[1][1:] + state[1][:1]
-    state[2] = state[2][2:] + state[2][:2]
-    state[3] = state[3][3:] + state[3][:3]
-    return state
 
 
 def invSubBytes(state, rbox):

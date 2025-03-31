@@ -13,11 +13,18 @@ def keyExpansion128(key, sbox, rcon):
         newkey = []
         interkey = np.transpose(retkey[-1]).tolist()
         rconarr = [rcon[i], 0, 0, 0]
+
+        # rotWord Function rotate word for 1 byte to left
         workingarr = rotWord(list.copy(interkey[-1]))
+
+        # Subword using sbox array
         for q in range(4):
             workingarr[q] = sbox[workingarr[q]]
+
+        # XOR with rcon to caculate 'G" funcion and xor with inter
         for j in range(len(workingarr)):
             workingarr[j] = workingarr[j] ^ interkey[0][j] ^ rconarr[j]
+
         newkey.append(list.copy(workingarr))
         for k in range(1, 4):
             for j in range(4):
@@ -44,8 +51,10 @@ def keyExpansion192(key, sbox, rcon):
         workingarr = rotWord(workingarr)
         for q in range(0, 4):
             workingarr[q] = sbox[workingarr[q]]
+
         for j in range(0, len(workingarr)):
             workingarr[j] = workingarr[j] ^ k6n_6[j] ^ rconarr[j]
+            
         retkey.append(list.copy(workingarr))
         index += 1
         for k in range(0, 5):
